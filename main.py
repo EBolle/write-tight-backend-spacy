@@ -22,6 +22,16 @@ def root():
     return {"message": "Hello World"}
 
 
-@app.get("/is-adverb/{word}")
+@app.get("/pos/is-adverb/{word}")
 def is_adverb(word: str) -> dict[str, bool]:
     return {"outcome": nlp(word)[0].pos_ == "ADV"}
+
+
+@app.get("/pos/all/{sentence}")
+def get_pos(sentence: str) -> dict[str, list[str]]:
+    doc = nlp(sentence)
+
+    text = [token.text for token in doc]
+    pos = [token.pos_ for token in doc]
+
+    return {"text": text, "pos": pos}
