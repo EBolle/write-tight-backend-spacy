@@ -29,7 +29,7 @@ def is_adverb(word: str) -> dict[str, bool]:
 
 @app.get("/pos/all/{sentence}")
 def get_pos(sentence: str) -> dict[str, list[str]]:
-    doc = nlp(sentence)
+    doc = nlp(sentence.lstrip())
 
     text = [token.text for token in doc]
     pos = [token.pos_ for token in doc]
