@@ -1,8 +1,15 @@
 import spacy
+from spacy.matcher import Matcher
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+# Initialize spaCy 
+
 nlp = spacy.load("en_core_web_sm")
+matcher = Matcher(nlp.vocab) 
+
+# Initialize FastAPI
 
 app = FastAPI()
 
@@ -16,22 +23,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Main
 
-@app.get("/")
-def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/pos/is-adverb/{word}")
-def is_adverb(word: str) -> dict[str, bool]:
-    return {"outcome": nlp(word)[0].pos_ == "ADV"}
-
-
-@app.get("/pos/all/{sentence}")
-def get_pos(sentence: str) -> dict[str, list[str]]:
+@app.get("/patterns/all/{sentence}")
+def get_all_patterns(sentence: str) -> dict[str, list[str]]:
     doc = nlp(sentence.lstrip())
 
     text = [token.text for token in doc]
     pos = [token.pos_ for token in doc]
 
     return {"text": text, "pos": pos}
+
+@app.get("/")
+def root():
+    return {"message": "Hello World"}
