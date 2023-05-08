@@ -34,9 +34,9 @@ app.add_middleware(
 # Main
 
 
-@app.get("/patterns/all/{sentence}")
-def get_all_patterns(sentence: str) -> dict[str, list[str]]:
-    doc = nlp(sentence.lstrip())
+@app.get("/patterns/all/{text}")
+def get_all_patterns(text: str) -> dict[str, list[str]]:
+    doc = nlp(text.lstrip())
 
     output = {
         "text": [token.text for token in doc],
