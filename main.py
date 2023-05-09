@@ -31,7 +31,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Main
+
+# ** Main **
 
 
 @app.get("/patterns/all/{text}")
