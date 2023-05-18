@@ -1,6 +1,6 @@
 # Rule-based matching patterns for consice (business) writing.
 
-description = {
+pattern_descriptions = {
     "ambiguousOpenings": (
         "A pronoun followed by a 'to be' verb is a vague sentence opening, try"
         " to be specific."
